@@ -49,11 +49,11 @@ class HashTable
     int position_of_x = findPos(x);
     //이미 존재하면 false
     if(isActive(position_of_x)) return false;
-    array[position_of_x] = HashEntry(x,ACTIVE);
+    array[position_of_x].info = ACTIVE;
+    array[position_of_x].element = x;
     if(++currentSize>array.size()) rehash();
     return true;
     }
-    enum EntryType { ACTIVE, EMPTY, DELETED };
     bool remove( const HashedObj & x )
     {
 	// FILL THIS 
@@ -65,7 +65,7 @@ class HashTable
     array[position_of_x] = DELETED;
     return true;
     }
-
+    enum EntryType { ACTIVE, EMPTY, DELETED };
 
   private:
     struct HashEntry
@@ -90,9 +90,9 @@ class HashTable
         int position_of_x = findPos(x);
         while(array[position_of_x].info != EMPTY && array[position_of_x].element !=x){
             //1,3,5,9,16
-            position_of_x+=i;
-            i+=2;
+            position_of_x+=i*i;
             if(position_of_x>=array.size()) position_of_x-=array.size();
+            i+=1;
 
         }
         return position_of_x;

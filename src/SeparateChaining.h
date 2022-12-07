@@ -48,11 +48,11 @@ class HashTable
     bool insert( const HashedObj & x )
     {
 	    // FILL THIS
-        list<HashedObj> & whichList = theLists[myhash(x)];
+        typename list<HashedObj> & position = theLists[myhash(x)];
         //이미 존재하는 것이면 false return
-        if (whichList.end()!=find(whichList.begin(),whichList.end(),x)) return false;
+        if (position.end()!=find(position.begin(),position.end(),x)) return false;
         //chain 앞에 추가하기
-        whichList.push_front(x);
+        position.push_front(x);
         //currentsize가 tablesize보다 크면 rehash
         if(++currentSize>theLists.size()) rehash();
         return true;
@@ -61,13 +61,13 @@ class HashTable
     bool remove( const HashedObj & x )
     {
 	    // FILL THIS
-        list<HashedObj> & whichList = theLists[myhash(x)]
+        list<HashedObj> & position = theLists[myhash(x)];
         //이미 존재하는 것이면 false return
-        if (whichList.end()!=find(whichList.begin(),whichList.end(),x)) return false;       
+        if(position.end()!=find(position.begin(),position.end(),x)) return false;       
         //x의 위치로 iterator 초기화
-        list<HashedObj>::iterator itr = find(whichList.begin(),whichList.end(),x)
+        list<HashedObj>::iterator itr = find(position.begin(),position.end(),x);
         //삭제
-        whichList.erase(itr);
+        position.erase(itr);
         --currentSize;
         return true;
     }
