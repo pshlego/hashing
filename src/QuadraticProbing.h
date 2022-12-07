@@ -90,9 +90,9 @@ class HashTable
         int position_of_x = findPos(x);
         while(array[position_of_x].info != EMPTY && array[position_of_x].element !=x){
             //1,3,5,9,16
-            position_of_x+=i*i;
+            position_of_x+=i;
+            i+=2;
             if(position_of_x>=array.size()) position_of_x-=array.size();
-            i+=1;
 
         }
         return position_of_x;
